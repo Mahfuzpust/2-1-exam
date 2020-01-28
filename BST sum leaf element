@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+     Node* left;
+     Node* right;
+};
+Node *newNode(int data)
+{
+    Node *node = new Node();
+    node->data = data;
+    node->left = NULL;
+    node->right = NULL;
+
+}
+
+int cheak(Node *node)
+{
+   if (node == NULL)
+       return 0;
+   if (node->left == NULL && node->right == NULL)
+       return 1;
+   return 0;
+}
+
+int Sum(Node *root)
+{
+
+    int r = 0;
+
+    if (root != NULL)
+    {
+
+       if (cheak(root->left))
+            r =r + root->left->data;
+       else
+            r= r+ Sum(root->left);
+            r=r+ Sum(root->right);
+    }
+
+    return r;
+}
+
+int main()
+{
+    Node *root= newNode(9);
+    root->left= newNode(8);
+    root->right = newNode(6);
+    root->left->left= newNode(5);
+    root->left->right= newNode(2);
+
+
+    cout << "Sum is "<<Sum(root);
+    return 0;
+}
+
+
